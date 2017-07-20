@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="adventureGameApp">
+
+<head>
+    <meta charset="UTF-8" />
+    <!--<script src="lib/angular.min.js.map"></script>
+    <script src="lib/angular.min.js"></script>-->
+    <script src="lib/angular.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/adventure-game.css">
+
+    <script src="adventureGameApp.js"></script>
+    <script src="game.js"></script>
+    <script src="key-press-handler.js"></script>
+    <script src="global-settings.js"></script>
+    <script src="player.js"></script>
+    <script src="enemies.js"></script>
+    <script src="move.js"></script>
+    <script src="board.js"></script>
+    <script src="items.js"></script>
+    <script src="black-mage.js"></script>
+    <script src="thief.js"></script>
+    <script src="rock-donker.js"></script>
+</head>
+
+<body ng-controller="AppController as app" ng-keydown="app.keyDown($event)">
+
+    <!--$event.keyCode={{app.keyChode}}-->
+    <div data-ng-if="!app.instructionsDisplayed" class="instructions">
+        <h2>Instructions</h2>
+        <p>Hunt down the renegades!!</p>
+        <p>Arrow Keys to move</p>
+        <p>Killing an enemy takes energy!</p>
+        <p>Consume Mountain Dew to fuel your rampage!!!</p>
+        <br>
+        <p>Press any key to start</p>
+        <br>
+        <p>(Please wait a few seconds for game to load)</p>
+        <p>(Be advised: There is sound when you kill an enemy)</p>
+    </div>
+
+    <div data-ng-if="app.gameOver" class="instructions">
+        <h1>GAME OVER</h1>
+        <p>You ran out of Mountain Dew and fell from exhaustion!</p>
+        <p>Body Count: {{ app.score }}</p>
+        <p>Reload page to play again</p>
+    </div>
+
+    <div data-ng-if="app.instructionsDisplayed">
+        <div>
+            <p>Score: {{ app.score }}</p>
+            <p>Energy(HP):
+                <span ng-repeat="hp in app.hp">
+                    <img src="img/mtn-dew44.png" />
+                </span>
+            </p>
+        </div>
+        <table class="app.board" id="board">
+            <tr ng-repeat="row in app.board.rows">
+                <td ng-repeat="square in row.squares">
+                    <img ng-if="square.isCovered" ng-src="img/grass.png" />
+                    <img ng-if="!square.isCovered && square.content == 'empty'" src="img/grass.png" />
+                    <img ng-if="square.content == 'black-mage'" src="img/black-mage44.png" />
+                    <img ng-if="square.content == 'player'" ng-src="{{ app.playerImg }}" />
+                    <img ng-if="square.content == 'blood'" src="img/blood44.png" />
+                    <img ng-if="square.content == 'item'" src="img/mtn-dew44.png" />
+                    <img ng-if="square.content == 'poison'" src="img/mtn-dew-decaf.png" />
+                    <img ng-if="square.content == 'thief'" src="img/thief.png" />
+                    <img ng-if="square.content == 'rock-donker'" src="img/rock-donker.png" />
+                    <img ng-if="square.content == 'rock'" src="img/rock.png" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</body>

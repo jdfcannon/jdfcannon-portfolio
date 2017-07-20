@@ -1,0 +1,15 @@
+Enemies:
+Slime- moves randomly and eats everything else and splits when it eats enough
+Dog- hunt down MD
+Ogre- chases player and kills unless player picks up ogre-slaying sword +9
+Rockdonker- adds terrain
+
+Buff:
+Code Red- move really far each turn and activate everything in path
+
+Map:
+Add barriers
+Make it move
+
+Skills:
+Heal- reduce MD to 1 for 10 turns and then return original MD + 3
