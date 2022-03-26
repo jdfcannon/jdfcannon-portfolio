@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "QvniQRSwmnkxCjy8o/kRehtXUcaSNyDWkhjCvDXuSw8=",
+  "Source": "OpticalCharacterRecognition",
+  "BasePath": "_content/OpticalCharacterRecognition",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
