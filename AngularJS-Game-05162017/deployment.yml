@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arcade-adventure-game
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: arcade-adventure-game
+  template:
+    metadata:
+      labels:
+        app: arcade-adventure-game
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: arcade-adventure-game
+        image: jdfc/arcade-adventure-game
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: arcade-adventure-game
+spec:
+  type: NodePort
+  selector:
+    app: arcade-adventure-game
+  ports:
+  - port: 80
+    targetPort: 8080

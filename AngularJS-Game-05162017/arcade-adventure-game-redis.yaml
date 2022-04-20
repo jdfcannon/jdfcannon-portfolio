@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arcade-adventure-game
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: arcade-adventure-game
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
+  template:
+    metadata:
+      labels:
+        app: arcade-adventure-game
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: arcade-adventure-game
+        image: jdfc/arcade-adventure-game
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+        - name: REDIS
+          value: "arcade-adventure-game"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: arcade-adventure-game
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8383
+  selector:
+    app: arcade-adventure-game
