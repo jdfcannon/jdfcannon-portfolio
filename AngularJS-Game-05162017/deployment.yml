@@ -22,7 +22,7 @@ spec:
             memory: "512Mi"
             cpu: "500m"
         ports:
-        - containerPort: 8080
+        - containerPort: 80
 
 ---
 
@@ -36,4 +36,4 @@ spec:
     app: arcade-adventure-game
   ports:
   - port: 80
-    targetPort: 8080
+    targetPort: 80
